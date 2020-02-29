@@ -1,3 +1,4 @@
+import { ParseObjectBase } from '../parse/parse_object_base';
 export class ParseQueryBase extends Parse.Query {
     objClass: any;
     constructor(objClass: any) {
@@ -7,16 +8,19 @@ export class ParseQueryBase extends Parse.Query {
 
     async findAsync<T>(options?: Parse.Query.FindOptions): Promise<Array<T>> {
         var data = await super.find(options);
-        return this.objClass.newArrayObject(data, this.objClass);
+        return ParseObjectBase.newArrayObject(data, this.objClass);
     }
 
-    async firstAsync<T>(options?: Parse.Query.FindOptions): Promise<T> {
+    async firstAsync<T>(options?: Parse.Query.FindOptions): Promise<T | undefined> {
         var data = await super.first(options);
-        return this.objClass.newObject(data, this.objClass);
+        if (data) {
+            return ParseObjectBase.newObject(data, this.objClass);
+        }
+        return Promise.resolve(undefined);
     }
 
     async getAsync<T>(objectId: string, options?: Parse.Query.FindOptions): Promise<T> {
         var data = await super.get(objectId, options);
-        return this.objClass.newObject(data, this.objClass);
+        return ParseObjectBase.newObject(data, this.objClass);
     }
 }

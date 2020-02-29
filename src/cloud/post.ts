@@ -26,6 +26,7 @@ export class PostCloud extends CloudFunctionBase {
         params.page = params.page || 1;
         postQuery.limit(params.perPage);
         postQuery.skip(params.perPage * (params.page - 1));
-        return new ResponseListBase<Post>(1, 10, await postQuery.findAsync<Post>({ useMasterKey: true }));
+        let data = await postQuery.findAsync<Post>({ useMasterKey: true });
+        return new ResponseListBase<Post>(1, 10, data);
     }
 }

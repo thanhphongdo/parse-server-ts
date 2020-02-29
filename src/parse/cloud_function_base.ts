@@ -11,7 +11,7 @@ export interface CloudFunctionInterface<T> {
 
 export class CloudFunctionBase {
     static unauthorized = {
-        code: Parse.ErrorCode.INVALID_SESSION_TOKEN,
+        code: Parse.Error.INVALID_SESSION_TOKEN as number,
         message: 'unauthorized'
     }
 
@@ -20,11 +20,11 @@ export class CloudFunctionBase {
     }
 
     static error(data: any, logsData?: LogsDataInterface) {
-        return new Parse.Error(data.code || Parse.ErrorCode.INTERNAL_SERVER_ERROR, data.message || 'internal server error');
+        return new Parse.Error(data.code || Parse.Error.INTERNAL_SERVER_ERROR, data.message || 'internal server error');
     }
 
     async defineCloud(cloudFunction: CloundFunction) {
-        Parse.Cloud.define(cloudFunction.name, async function (req: Parse.Cloud.FunctionRequest, res: any) {
+        Parse.Cloud.define(cloudFunction.name, async (req: Parse.Cloud.FunctionRequest) => {
             try {
                 var result = await cloudFunction(req.params, req);
                 return result;

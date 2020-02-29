@@ -24,6 +24,7 @@ if(Config.parseServer != undefined){
                 applyChangeConfig(prodConfig.Config);
                 break;
             default:
+                applyChangeConfig(devConfig.Config);
                 break;
         }
     }
