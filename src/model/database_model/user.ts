@@ -1,8 +1,9 @@
 import { Object } from 'parse/node';
+import { ParseObjectBase } from '../../parse';
 
 export class User extends Parse.User {
-    constructor() {
-        super();
+    constructor(attr: any) {
+        super(attr);
     }
 
     get email(): string | undefined {
@@ -15,19 +16,19 @@ export class User extends Parse.User {
         }
     }
 
-    get firstName(): string{
+    get firstName(): string {
         return this.get('firstName');
     }
 
-    set firstName(value: string){
+    set firstName(value: string) {
         this.set('firstName', value);
     }
 
-    get lastName(): string{
+    get lastName(): string {
         return this.get('lastName');
     }
 
-    set lastName(value: string){
+    set lastName(value: string) {
         this.set('lastName', value);
     }
 }

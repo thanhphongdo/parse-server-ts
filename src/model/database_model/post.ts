@@ -1,7 +1,6 @@
 import { ParseObjectBase } from '../../parse';
 import { User } from './user';
 
-
 export class Post extends ParseObjectBase {
     constructor() {
         super(Post.name);
@@ -23,11 +22,11 @@ export class Post extends ParseObjectBase {
         this.set('like', value);
     }
 
-    get user(): any {
-        return this.get('user');
+    get user(): User {
+        return new User(this.get('user').toJSON());
     }
 
-    set user(value: any) {
+    set user(value: User) {
         this.set('user', value);
     }
 }
