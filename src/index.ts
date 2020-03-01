@@ -35,7 +35,7 @@ var dashboard = new ParseDashboard({
 var app: Application = express();
 
 // Serve static assets from the /public folder
-// app.use('/public', express.static(path.join(__dirname, '/public')));
+app.use('/docs', express.static(path.join(__dirname, '/docs')));
 
 // Serve the Parse API on the /parse URL prefix
 var mountPath = '/parse';

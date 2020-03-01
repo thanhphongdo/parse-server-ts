@@ -23,6 +23,10 @@ export class CloudFunctionBase {
         return new Parse.Error(data.code || Parse.Error.INTERNAL_SERVER_ERROR, data.message || 'internal server error');
     }
 
+    static errorValidate(data: any, logsData?: LogsDataInterface) {
+        return new Parse.Error(Parse.Error.VALIDATION_ERROR, data);
+    }
+
     async defineCloud(cloudFunction: CloundFunction) {
         Parse.Cloud.define(cloudFunction.name, async (req: Parse.Cloud.FunctionRequest) => {
             try {
