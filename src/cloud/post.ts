@@ -13,8 +13,8 @@ export class PostCloud extends CloudFunctionBase {
     @CloudFunctionBase.validateRequestParam(RequestPost)
     async addPost(params: RequestPost, request: Parse.Cloud.FunctionRequest): Promise<Post> {
         var post = new Post();
-        post.message = params.message;
-        post.like = params.like;
+        post.message = params.message as any;
+        post.like = params.like as any;
         post.user = request.user as any;
         return await post.saveAsync<Post>(null, { useMasterKey: true });
     }

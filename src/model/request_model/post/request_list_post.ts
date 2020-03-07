@@ -3,6 +3,7 @@ import { Validator } from '../../../validate_decorator';
 
 export class RequestListPost extends RequestListBase {
     @Validator.isNotEmpty()
+    @Validator.maxLength([5])
     text?: string;
 }
 

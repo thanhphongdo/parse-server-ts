@@ -6,19 +6,19 @@ export class Post extends ParseObjectBase {
         super(Post.name);
     }
 
-    get message(): string | undefined {
+    get message(): string {
         return this.get('message');
     }
 
-    set message(value: string | undefined) {
+    set message(value: string) {
         this.set('message', value);
     }
 
-    get like(): number | undefined {
+    get like(): number {
         return this.get('like');
     }
 
-    set like(value: number | undefined) {
+    set like(value: number) {
         this.set('like', value);
     }
 

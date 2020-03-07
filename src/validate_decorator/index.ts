@@ -1,16 +1,18 @@
 import { ValidationSchema, registerSchema, validate } from 'class-validator';
-let validatorSchema: { [key: string]: ValidationSchema } = {};
-function checkInit(target: any) {
+export let validatorSchema: { [key: string]: ValidationSchema } = {};
+function checkInit(target: any, key: any) {
     const schemaName = target.constructor.name;
     if (!validatorSchema[schemaName]) {
         const baseClassName = Object.getPrototypeOf(target.constructor).name;
         if (baseClassName && validatorSchema[baseClassName]) {
             validatorSchema[schemaName] = JSON.parse(JSON.stringify(validatorSchema[baseClassName]));
+            validatorSchema[schemaName].properties[key] = [];
             validatorSchema[schemaName].name = schemaName;
         } else {
             validatorSchema[schemaName] = {
                 name: schemaName,
                 properties: {
+                    [key]: []
                 }
             }
         }
@@ -37,8 +39,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isDefined',
                     message: message,
@@ -54,8 +57,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isOptional',
                     message: message
@@ -70,8 +74,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'equals',
                     message: message,
@@ -87,8 +92,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'notEquals',
                     message: message,
@@ -104,8 +110,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isEmpty',
                     message: message
@@ -120,8 +127,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isNotEmpty',
                     message: message
@@ -136,8 +144,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isIn',
                     message: message,
@@ -153,8 +162,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isNotIn',
                     message: message,
@@ -170,8 +180,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isBoolean',
                     message: message
@@ -186,8 +197,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isDate',
                     message: message
@@ -202,8 +214,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isString',
                     message: message
@@ -218,8 +231,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isNumber',
                     message: message,
@@ -235,8 +249,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isInt',
                     message: message
@@ -251,8 +266,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isArray',
                     message: message
@@ -267,8 +283,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isEnum',
                     message: message,
@@ -284,8 +301,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isDivisibleBy',
                     message: message,
@@ -301,8 +319,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isPositive',
                     message: message
@@ -317,8 +336,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isNegative',
                     message: message
@@ -333,8 +353,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'min',
                     message: message,
@@ -350,8 +371,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'max',
                     message: message,
@@ -367,8 +389,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'minDate',
                     message: message,
@@ -384,8 +407,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'maxDate',
                     message: message,
@@ -401,8 +425,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isBooleanString',
                     message: message
@@ -417,8 +442,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isDateString',
                     message: message
@@ -433,8 +459,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isNumberString',
                     message: message
@@ -449,8 +476,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'contains',
                     message: message,
@@ -466,8 +494,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'notContains',
                     message: message,
@@ -483,8 +512,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isAlpha',
                     message: message
@@ -499,8 +529,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isAlphanumeric',
                     message: message
@@ -515,8 +546,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isDecimal',
                     message: message,
@@ -532,8 +564,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isAscii',
                     message: message
@@ -548,8 +581,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isBase64',
                     message: message
@@ -564,8 +598,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isByteLength',
                     message: message,
@@ -581,8 +616,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isCreditCard',
                     message: message
@@ -597,8 +633,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isCurrency',
                     message: message,
@@ -614,8 +651,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isEmail',
                     message: message,
@@ -631,8 +669,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isFQDN',
                     message: message,
@@ -648,8 +687,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isFullWidth',
                     message: message
@@ -664,8 +704,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isHalfWidth',
                     message: message
@@ -680,8 +721,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isVariableWidth',
                     message: message
@@ -696,8 +738,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isHexColor',
                     message: message
@@ -712,8 +755,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isHexadecimal',
                     message: message
@@ -728,8 +772,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isMACAddress',
                     message: message
@@ -744,8 +789,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isIP',
                     message: message,
@@ -761,8 +807,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isPort',
                     message: message
@@ -777,8 +824,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isISBN',
                     message: message,
@@ -794,8 +842,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isISIN',
                     message: message
@@ -810,8 +859,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isISO8601',
                     message: message
@@ -826,8 +876,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isJSON',
                     message: message
@@ -842,8 +893,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isJWT',
                     message: message
@@ -858,8 +910,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isObject',
                     message: message
@@ -874,8 +927,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isNotEmptyObject',
                     message: message
@@ -890,8 +944,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isLowercase',
                     message: message
@@ -906,8 +961,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isLatLong',
                     message: message
@@ -922,8 +978,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isLatitude',
                     message: message
@@ -938,8 +995,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isLongitude',
                     message: message
@@ -954,8 +1012,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isMobilePhone',
                     message: message,
@@ -971,8 +1030,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isISO31661Alpha2',
                     message: message
@@ -987,8 +1047,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isISO31661Alpha3',
                     message: message
@@ -1003,8 +1064,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isPhoneNumber',
                     message: message,
@@ -1020,8 +1082,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isMongoId',
                     message: message
@@ -1036,8 +1099,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isMultibyte',
                     message: message
@@ -1052,8 +1116,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isSurrogatePair',
                     message: message
@@ -1068,8 +1133,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isUrl',
                     message: message,
@@ -1085,8 +1151,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isUUID',
                     message: message,
@@ -1102,8 +1169,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isUppercase',
                     message: message
@@ -1118,8 +1186,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'length',
                     message: message,
@@ -1135,8 +1204,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'minLength',
                     message: message,
@@ -1152,8 +1222,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'maxLength',
                     message: message,
@@ -1169,8 +1240,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'matches',
                     message: message,
@@ -1186,8 +1258,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isMilitaryTime',
                     message: message
@@ -1202,8 +1275,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isHash',
                     message: message,
@@ -1219,8 +1293,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isISSN',
                     message: message
@@ -1235,8 +1310,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'arrayContains',
                     message: message,
@@ -1252,8 +1328,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'arrayNotContains',
                     message: message,
@@ -1269,8 +1346,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'arrayNotEmpty',
                     message: message
@@ -1285,8 +1363,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'arrayMinSize',
                     message: message,
@@ -1302,8 +1381,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'arrayMaxSize',
                     message: message,
@@ -1319,8 +1399,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'arrayUnique',
                     message: message
@@ -1335,8 +1416,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'isInstance',
                     message: message,
@@ -1352,8 +1434,9 @@ export const Validator = {
             if (message) {
                 message = message.replace('$key', key);
             }
-            checkInit(target);
+            checkInit(target, key);
             validatorSchema[schemaName].properties[key] = [
+                ...validatorSchema[schemaName].properties[key] || [], 
                 {
                     type: 'allow',
                     message: message
@@ -1382,7 +1465,7 @@ export const Validator = {
 //                 }
 //             }
 //             validatorSchema[schemaName].properties[key] = [
-//                 {
+// ...validatorSchema[schemaName].properties[key] || [],{...validatorSchema[schemaName].properties[key] || [],
 //                     type: '${fnName}',
 //                     message: message
 //                 }
