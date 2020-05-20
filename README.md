@@ -165,4 +165,4 @@ You can change the server URL in all of the open-source SDKs, but we're releasin
 As of April 5, 2017, Parse, LLC has transferred this code to the parse-community organization, and will no longer be contributing to or distributing this code.
 
 ### Make document with typedoc
-typedoc --target ES5 --out ./doc/ ./src/
+typedoc --target ES7 --out ./doc/ ./src/
