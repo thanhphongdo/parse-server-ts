@@ -10,6 +10,7 @@ import { appConfig } from './config/index';
 if (!appConfig.parseServer && appConfig.parseServer) {
     console.log('Config not found');
 }
+console.log('ENV Name: ' + appConfig.envName);
 var api = new ParseServer({
     databaseURI: appConfig.parseServer.databaseURI,
     cloud: __dirname + appConfig.parseServer.cloud,

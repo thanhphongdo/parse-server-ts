@@ -1,6 +1,7 @@
 import { ConfigInterface } from './config_interface';
 
 export var Config: ConfigInterface = {
+    envName: 'DEBUG',
     parseServer: {
         appId: 'app.id.debug',
         appName: 'app.test',
