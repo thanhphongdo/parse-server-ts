@@ -23,7 +23,7 @@ Read the full Parse Server guide here: https://github.com/ParsePlatform/parse-se
 * `npm install` or `yarn install`
 * Install mongo locally using http://docs.mongodb.org/master/tutorial/install-mongodb-on-os-x/
 * Run `mongo` to connect to your database, just to make sure it's working. Once you see a mongo prompt, exit with Control-D
-* Run `npm build`
+* Run `npm run build`
 * Start server `ENV=prod node ./build/index.js`
 
 ### Getting Started With Heroku + mLab Development
