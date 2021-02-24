@@ -16,7 +16,10 @@
     "coveralls": "^3.0.9",
     "istanbul": "^0.4.5",
     "mocha": "^8.3.0",
-    "ts-node": "^9.1.1"
+    "nodemon": "^2.0.7",
+    "ts-node": "^9.1.1",
+    "tsc-watch": "^4.2.9",
+    "typescript": "^4.2.2"
   },
   "dependencies": {
     "@babel/core": "^7.8.6",
@@ -35,12 +38,12 @@
     "request-promise": "^4.2.5",
     "sharp": "^0.27.1",
     "typedoc": "^0.20.25",
-    "typescript": "^4.1.5",
     "validator": "^13.5.2",
     "watson-developer-cloud": "^4.0.1"
   },
   "scripts": {
     "start": "node index.js",
+    "debug": "tsc --watch & ENV=debug nodemon --inspect ./build/index.js",
     "build": "tsc",
     "docs": "typedoc --target ES7 --out ./build/docs/ ./src/"
   },

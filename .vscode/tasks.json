@@ -10,6 +10,37 @@
             "problemMatcher": [
                 "$tsc"
             ]
+        },
+        {
+            "label": "debug",
+            "type": "npm",
+            "script": "debug",
+            "isBackground": true,
+            "problemMatcher": [
+                {
+                    "pattern": [
+                        {
+                            "regexp": ".",
+                            "file": 1,
+                            "location": 2,
+                            "message": 3
+                        }
+                    ],
+                    "background": {
+                        "activeOnStart": true,
+                        "beginsPattern": ".",
+                        "endsPattern": "."
+                    }
+                }
+            ]
+        },
+        {
+            "label": "kill_debug",
+            "type": "process",
+            "command": [
+                "${command:workbench.action.tasks.terminate}",
+                "${command:workbench.action.acceptSelectedQuickOpenItem}",
+            ],
         }
     ]
 }
