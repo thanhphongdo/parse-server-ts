@@ -24,6 +24,9 @@ export class PostCloud extends CloudFunctionBase {
         let postQuery = new ParseQueryBase(Post);
         params.perPage = params.perPage || 10;
         params.page = params.page || 1;
+        if (params.perPage > 10000) {
+            throw new Parse.Error(400, 'Per Page limit 10000');
+        }
         postQuery.limit(params.perPage);
         postQuery.skip(params.perPage * (params.page - 1));
         postQuery.include('user');
