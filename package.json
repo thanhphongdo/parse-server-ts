@@ -45,7 +45,8 @@
     "start": "node index.js",
     "debug": "tsc --watch & ENV=debug nodemon --inspect ./build/index.js",
     "build": "tsc",
-    "docs": "typedoc --target ES7 --out ./build/docs/ ./src/"
+    "docs": "typedoc --out ./build/docs/ ./src/",
+    "docs-es7": "typedoc --target ES7 --out ./build/docs/ ./src/"
   },
   "engines": {
     "node": ">=4.3"
