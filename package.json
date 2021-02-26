@@ -29,7 +29,7 @@
     "class-validator": "^0.13.1",
     "express": "^4.17.1",
     "kerberos": "~1.1.x",
-    "parse": "~2.19.0",
+    "parse": "~3.1.0",
     "parse-dashboard": "^2.0.5",
     "parse-server": "*",
     "python-shell": "^2.0.3",

@@ -14,6 +14,10 @@ export interface ConfigInterface {
         },
         maxUploadSize?: string;
     };
+    dashboardUser?: Array<{
+        user?: string;
+        pass?: string;
+    }>;
     [key: string]: any;
     scrapy: {
         scrapyd: string;

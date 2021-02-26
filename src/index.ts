@@ -19,7 +19,6 @@ var api = new ParseServer({
     serverURL: appConfig.parseServer.serverURL,
     liveQuery: appConfig.parseServer.liveQuery
 });
-
 var dashboard = new ParseDashboard({
     apps: [{
         serverURL: appConfig.parseServer.serverURL,
@@ -27,10 +26,7 @@ var dashboard = new ParseDashboard({
         masterKey: appConfig.parseServer.masterKey,
         appName: appConfig.parseServer.appName
     }],
-    // users: [{
-    //     user: 'root',
-    //     pass: 'r00t'
-    // }]
+    users: appConfig.dashboardUser
 }, { allowInsecureHTTP: true });
 
 var app: Application = express();
