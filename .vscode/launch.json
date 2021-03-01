@@ -11,7 +11,7 @@
             "preLaunchTask": "buildts",
             "program": "${workspaceFolder}/build/index.js",
             "env": {
-                "ENV": "debug"
+                "ENV": "dev"
             },
             "outFiles": [
                 "${workspaceFolder}/**/*.js"

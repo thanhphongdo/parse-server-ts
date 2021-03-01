@@ -1,4 +1,5 @@
 // import * as Parse from 'parse-server/node';
+import { validate } from 'class-validator';
 export interface LogsDataInterface { }
 
 export interface CloundFunction {
@@ -34,7 +35,13 @@ export class CloudFunctionBase {
                 [propertyKey]: async function () {
                     let result = null;
                     let params = arguments[0];
-                    let check = await schema.validate(params);
+                    let obj = new schema();
+                    if (params) {
+                        Object.keys(params).forEach(key => {
+                            obj[key] = params[key];
+                        });
+                    }
+                    let check = await validate(obj);
                     if (check.length) {
                         arguments[0].errorValidate = check;
                         result = await target.throwValidate.apply(this, arguments);

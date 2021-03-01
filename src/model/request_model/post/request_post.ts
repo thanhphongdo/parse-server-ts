@@ -1,14 +1,13 @@
 import { BaseModel } from '../../base_model';
-import { Validator } from '../../../validate_decorator';
+import { IsNotEmpty, IsNumber } from 'class-validator';
 
 export class RequestPost extends BaseModel {
-    @Validator.isNotEmpty()
+    @IsNotEmpty()
     message?: string;
 
-    @Validator.isNumber([])
+    @IsNumber()
     like?: number;
 
-    @Validator.isNotEmpty()
+    @IsNotEmpty()
     text?: string;
 }
-Validator.registerSchema(RequestPost.name);

@@ -1,10 +1,9 @@
 import { RequestListBase } from '../request_list_base';
-import { Validator } from '../../../validate_decorator';
+
+import { IsNotEmpty, MaxLength } from 'class-validator';
 
 export class RequestListPost extends RequestListBase {
-    @Validator.isNotEmpty()
-    @Validator.maxLength([5])
+    @IsNotEmpty()
+    @MaxLength(5)
     text?: string;
 }
-
-Validator.registerSchema(RequestListPost.name);

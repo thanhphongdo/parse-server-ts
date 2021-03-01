@@ -1,4 +1,4 @@
-import { Validator } from '../../validate_decorator';
+import { IsNumber, IsArray} from 'class-validator';
 import { BaseModel } from '../base_model';
 
 export interface OrderByInterface {
@@ -8,13 +8,13 @@ export interface OrderByInterface {
 
 export class RequestListBase extends BaseModel {
 
-    @Validator.isNumber([])
+    @IsNumber()
     page?: number = 1;
 
-    @Validator.isNumber([])
+    @IsNumber()
     perPage?: number = 10;
 
-    @Validator.isArray()
+    @IsArray()
     order?: Array<OrderByInterface>;
     constructor(page?: number, perPage?: number, order?: Array<OrderByInterface>) {
         super();
@@ -23,5 +23,3 @@ export class RequestListBase extends BaseModel {
         this.order = order || [];
     }
 }
-
-Validator.registerSchema(RequestListBase.name);
