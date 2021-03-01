@@ -12,12 +12,6 @@ export var Config: ConfigInterface = {
         port: 1337,
         serverURL: 'http://localhost:1337/parse'
     },
-    dashboardUser: [
-        {
-            user: 'root',
-            pass: 'r00t'
-        }
-    ],
     scrapy: {
         scrapyd: 'http://localhost:6800'
     }
