@@ -1,11 +1,12 @@
-import { CloudFunctionBase } from '../parse/index';
-import { RequestPost, RequestListPost, ResponseListBase, Post } from '../model/index';
-import { ParseQueryBase } from '../parse';
+import { CloudFunctionBase } from '../../parse/index';
+import { RequestPost, RequestListPost, ResponseListBase, Post } from '../../model/index';
+import { ParseQueryBase } from '../../parse';
 
 export class PostCloud extends CloudFunctionBase {
     constructor() {
         super();
         this.defineCloud(this.addPost);
+        this.defineCloud(this.addIncognitoPost);
         this.defineCloud(this.listPost);
     }
 
@@ -16,6 +17,14 @@ export class PostCloud extends CloudFunctionBase {
         post.message = params.message as any;
         post.like = params.like as any;
         post.user = request.user as any;
+        return await post.saveAsync<Post>(null, { useMasterKey: true });
+    }
+
+    @CloudFunctionBase.validateRequestParam(RequestPost)
+    async addIncognitoPost(params: RequestPost, request: Parse.Cloud.FunctionRequest): Promise<Post> {
+        var post = new Post();
+        post.message = params.message as any;
+        post.like = params.like as any;
         return await post.saveAsync<Post>(null, { useMasterKey: true });
     }
 

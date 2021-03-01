@@ -1,4 +1,13 @@
-import { User, Post } from "../model/index";
-import { PostCloud } from './post';
+import { PostCloud } from './functions/post';
 
+// Define Cloud Functions
 const postCloud = new PostCloud();
+// import('./functions/post').then(p => new p.PostCloud());
+
+// Define Triggers
+
+
+// Define Jobs
+
+
+// Define Live Queries
