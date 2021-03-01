@@ -1,11 +1,8 @@
-import { PostCloud } from './functions/post';
-
 // Define Cloud Functions
-const postCloud = new PostCloud();
-// import('./functions/post').then(p => new p.PostCloud());
+import('./functions/post').then(c => new c.PostCloud());
 
 // Define Triggers
-
+import('./triggers/post').then(c => new c.PostCloud());
 
 // Define Jobs
 
