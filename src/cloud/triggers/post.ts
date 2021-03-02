@@ -1,6 +1,6 @@
 import { CloudTriggerBase } from '../../parse/index';
 
-export class PostCloud extends CloudTriggerBase {
+export class PostTrigger extends CloudTriggerBase {
     constructor() {
         super();
         this.defineTriggerAfterSave('Post', this.afterSavePost);

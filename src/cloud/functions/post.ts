@@ -2,7 +2,7 @@ import { CloudFunctionBase } from '../../parse/index';
 import { RequestPost, RequestListPost, ResponseListBase, Post } from '../../model/index';
 import { ParseQueryBase } from '../../parse';
 
-export class PostCloud extends CloudFunctionBase {
+export class PostFunction extends CloudFunctionBase {
     constructor() {
         super();
         this.defineCloud(this.addPost);
