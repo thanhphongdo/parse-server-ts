@@ -9,7 +9,6 @@ export var Config:ConfigInterface = {
             pass: 'r00t'
         }
     ],
-    scrapy: {
-        scrapyd: 'http://localhost:6800'
-    }
+    dashboardUrl: '/-board',
+    addDocs: false
 }

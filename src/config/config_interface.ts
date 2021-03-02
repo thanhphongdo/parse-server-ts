@@ -2,6 +2,7 @@ export interface ConfigInterface {
     envName: string;
     parseServer: {
         appName?: string;
+        mountPath?: string;
         databaseURI?: string;
         cloud?: string;
         appId?: string;
@@ -14,12 +15,11 @@ export interface ConfigInterface {
         },
         maxUploadSize?: string;
     };
+    dashboardUrl?: string;
     dashboardUser?: Array<{
         user?: string;
         pass?: string;
     }>;
     [key: string]: any;
-    scrapy: {
-        scrapyd: string;
-    }
+    addDocs?: boolean;
 }

@@ -1,48 +1,48 @@
 import { Application } from 'express';
 import express = require('express');
-import request = require('request');
-import { PythonShell } from 'python-shell';
-var fs = require('fs');
-var ParseServer = require('parse-server').ParseServer;
-var ParseDashboard = require('parse-dashboard');
-var path = require('path');
+const http = require('http');
+const ParseServer = require('parse-server').ParseServer;
+const ParseDashboard = require('parse-dashboard');
+const path = require('path');
 import { appConfig } from './config/index';
 if (!appConfig.parseServer && appConfig.parseServer) {
     console.log('Config not found');
 }
-console.log('ENV Name: ' + appConfig.envName);
-var api = new ParseServer({
+const serverUrl = (appConfig.parseServer.serverURL || '') + appConfig.parseServer.mountPath;
+const api = new ParseServer({
     databaseURI: appConfig.parseServer.databaseURI,
     cloud: __dirname + appConfig.parseServer.cloud,
     appId: appConfig.parseServer.appId,
     masterKey: appConfig.parseServer.masterKey,
-    serverURL: appConfig.parseServer.serverURL,
+    serverURL: serverUrl,
     liveQuery: appConfig.parseServer.liveQuery
 });
-var dashboard = new ParseDashboard({
-    apps: [{
-        serverURL: appConfig.parseServer.serverURL,
-        appId: appConfig.parseServer.appId,
-        masterKey: appConfig.parseServer.masterKey,
-        appName: appConfig.parseServer.appName
-    }],
-    users: appConfig.dashboardUser
-}, { allowInsecureHTTP: true });
 
-var app: Application = express();
+const app: Application = express();
 
 // Serve static assets from the /public folder
-app.use('/docs', express.static(path.join(__dirname, '/docs')));
+if (appConfig.addDocs) {
+    app.use('/docs', express.static(path.join(__dirname, '/docs')));
+}
 
-// Serve the Parse API on the /parse URL prefix
-var mountPath = '/parse';
-app.use(mountPath, api);
+app.use(appConfig.parseServer.mountPath || '', api);
 
-app.use('/-board', dashboard);
+if (appConfig.dashboardUrl) {
+    const dashboard = new ParseDashboard({
+        apps: [{
+            serverURL: serverUrl,
+            appId: appConfig.parseServer.appId,
+            masterKey: appConfig.parseServer.masterKey,
+            appName: appConfig.parseServer.appName
+        }],
+        users: appConfig.dashboardUser
+    }, { allowInsecureHTTP: true });
+    app.use(appConfig.dashboardUrl, dashboard);
+}
 
 // Parse Server plays nicely with the rest of your web routes
 app.get('/', function (req, res) {
-    res.status(200).send('I dream of being a website.  Please star the parse-server repo on GitHub!');
+    res.status(200).send('PARSE NOW!!!');
 });
 
 app.use(function (req, res, next) {
@@ -50,18 +50,20 @@ app.use(function (req, res, next) {
     next()
 });
 
-
-// There will be a test page available on the /test path of your server url
-// Remove this before launching your app
-// app.get('/test', function(req, res) {
-//   res.sendFile(path.join(__dirname, '/public/test.html'));
-// });
-
-var httpServer = require('http').createServer(app);
+const httpServer = http.createServer(app);
 httpServer.listen(appConfig.parseServer.port, function () {
-    console.log('parse-server running on port ' + appConfig.parseServer.port + '.');
-    console.log('MongoDB uri ' + appConfig.parseServer.databaseURI + '.');
+    if (appConfig.envName != 'PROD') {
+        console.log(`ENV Name:            ${appConfig.envName}`);
+        console.log(`Parse Server port:   ${appConfig.parseServer.port}`);
+        console.log(`Server URL:          http://localhost:${appConfig.parseServer.port}`);
+        if (appConfig.dashboardUrl) {
+            console.log(`Dashboard URL:       http://localhost:${appConfig.parseServer.port}${appConfig.dashboardUrl}`);
+        }
+        console.log(`MongoDB uri:         ${appConfig.parseServer.databaseURI}`);
+    }
 });
 
 // This will enable the Live Query real-time server
-ParseServer.createLiveQueryServer(httpServer);
+if (appConfig.parseServer.liveQuery) {
+    ParseServer.createLiveQueryServer(httpServer);
+}
