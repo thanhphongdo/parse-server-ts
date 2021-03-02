@@ -29,4 +29,12 @@ export class Post extends ParseObjectBase {
     set user(value: User) {
         this.set('user', value);
     }
+
+    get view(): number {
+        return this.get('view');
+    }
+
+    set view(value: number) {
+        this.set('view', value);
+    }
 }

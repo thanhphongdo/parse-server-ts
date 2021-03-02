@@ -11,6 +11,11 @@ export class ParseQueryBase extends Parse.Query {
         return ParseObjectBase.newArrayObject(data, this.objClass);
     }
 
+    async findAllAsync<T>(options?: Parse.Query.BatchOptions): Promise<Array<T>> {
+        var data = await super.findAll(options);
+        return ParseObjectBase.newArrayObject(data, this.objClass);
+    }
+
     async firstAsync<T>(options?: Parse.Query.FindOptions): Promise<T | undefined> {
         var data = await super.first(options);
         if (data) {
