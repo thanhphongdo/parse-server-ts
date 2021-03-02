@@ -53,13 +53,13 @@ app.use(function (req, res, next) {
 const httpServer = http.createServer(app);
 httpServer.listen(appConfig.parseServer.port, function () {
     if (appConfig.envName != 'PROD') {
-        console.log(`ENV Name:            ${appConfig.envName}`);
-        console.log(`Parse Server port:   ${appConfig.parseServer.port}`);
-        console.log(`Server URL:          http://localhost:${appConfig.parseServer.port}`);
+        console.log(`ENV Name:        ${appConfig.envName}`);
+        console.log(`Server port:     ${appConfig.parseServer.port}`);
+        console.log(`Server URL:      http://localhost:${appConfig.parseServer.port}`);
         if (appConfig.dashboardUrl) {
-            console.log(`Dashboard URL:       http://localhost:${appConfig.parseServer.port}${appConfig.dashboardUrl}`);
+            console.log(`Dashboard URL:   http://localhost:${appConfig.parseServer.port}${appConfig.dashboardUrl}`);
         }
-        console.log(`MongoDB uri:         ${appConfig.parseServer.databaseURI}`);
+        console.log(`MongoDB uri:     ${appConfig.parseServer.databaseURI}`);
     }
 });
 
