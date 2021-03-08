@@ -31,4 +31,28 @@ export class User extends Parse.User {
     set lastName(value: string) {
         this.set('lastName', value);
     }
+
+    get balance(): number {
+        return this.get('balance');
+    }
+
+    set balance(value: number) {
+        this.set('balance', value);
+    }
+
+    get isAdmin(): number {
+        return this.get('isAdmin');
+    }
+
+    set isAdmin(value: number) {
+        this.set('isAdmin', value);
+    }
+
+    get approved(): boolean {
+        return this.get('approved');
+    }
+
+    set approved(value: boolean) {
+        this.set('approved', value);
+    }
 }
