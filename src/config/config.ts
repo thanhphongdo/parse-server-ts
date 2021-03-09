@@ -5,7 +5,7 @@ export var Config:ConfigInterface = {
     parseServer:{
         appId: 'app.id',
         mountPath: '/parse',
-        appName: 'app.test',
+        appName: 'innofunds',
         cloud: '/cloud/main.js',
         databaseURI: 'mongodb://root:1nn0r1a@localhost:27017/parse?authSource=admin',
         masterKey: 'masterkey',

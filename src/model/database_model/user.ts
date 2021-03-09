@@ -40,11 +40,11 @@ export class User extends Parse.User {
         this.set('balance', value);
     }
 
-    get isAdmin(): number {
+    get isAdmin(): boolean {
         return this.get('isAdmin');
     }
 
-    set isAdmin(value: number) {
+    set isAdmin(value: boolean) {
         this.set('isAdmin', value);
     }
 
